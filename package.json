@@ -1,0 +1,70 @@
+{
+  "name": "@open-project-templates/nodejs-module-typescript",
+  "version": "1.0.0",
+  "private": true,
+  "description": "NodeJS module that has been written in TypeScript language",
+  "main": "dist/index.js",
+  "scripts": {
+    "clean": "rimraf dist/",
+    "build": "tsc",
+    "rebuild": "run-s clean build",
+    "test": "mocha --require ts-node/register tests/index.ts",
+    "coverage": "nyc npm run test",
+    "coveralls": "cat coverage/lcov.info | coveralls",
+    "prepublish": "run-s rebuild coverage",
+    "postpublish": "run-s coveralls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/open-project-templates/nodejs-module-typescript.git"
+  },
+  "keywords": [
+    "open-project",
+    "open-project-template",
+    "template",
+    "nodejs",
+    "typescript",
+    "npm",
+    "module"
+  ],
+  "types": "index.d.ts",
+  "author": "Open Project Templates",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/open-project-templates/nodejs-module-typescript/issues"
+  },
+  "homepage": "https://github.com/open-project-templates/nodejs-module-typescript#readme",
+  "devDependencies": {
+    "@types/chai": "^4.2.9",
+    "@types/mocha": "^7.0.1",
+    "@types/node": "^13.7.4",
+    "chai": "^4.2.0",
+    "coveralls": "^3.0.9",
+    "mocha": "^7.0.1",
+    "npm-run-all": "^4.1.5",
+    "nyc": "^15.0.0",
+    "rimraf": "^3.0.2",
+    "ts-interface-builder": "^0.2.1",
+    "ts-interface-checker": "^0.1.10",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.8.2"
+  },
+  "nyc": {
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "exclude": [
+      "coverage/**/*",
+      "dist/**/*",
+      "tests/**/*",
+      "**/*.d.ts"
+    ],
+    "reporter": [
+      "text",
+      "html",
+      "lcov"
+    ],
+    "all": true
+  }
+}
