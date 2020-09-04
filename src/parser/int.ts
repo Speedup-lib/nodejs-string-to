@@ -9,7 +9,7 @@ import { Parser as IParser, } from '../type/parser';
 export class Parser implements IParser<number> {
 
     /**
-     * Parse a string into an integer number
+     * Validate string and check whether its possible to parse as integer
      * @param val String value to parse
      * @param options validator.IsIntOptions
      */
@@ -19,7 +19,7 @@ export class Parser implements IParser<number> {
     };
 
     /**
-     * Parse a string into an integer number
+     * Validate string and check whether its possible to parse as integer
      * @param val String value to parse
      * @param options validator.IsIntOptions
      */
