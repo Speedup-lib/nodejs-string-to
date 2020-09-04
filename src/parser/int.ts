@@ -15,7 +15,7 @@ export class Parser implements IParser<number> {
      */
     validateSync(val?: string, options?: validator.IsIntOptions): boolean {
         // safely convert to string (for null and undefined values)
-        return validator.isInt(val + '', options,);
+        return validator.isInt(val + '', options,) || validator.isHexadecimal(val + '',);
     };
 
     /**
