@@ -9,7 +9,7 @@ import { Parser as IParser, } from '../type/parser';
 export class Parser implements IParser<number> {
 
     /**
-     * Parse a string into an integer number
+     * Parse a string into an float number
      * @param val String value to parse
      * @param options radix (the second parameter in parseInt method)
      */
@@ -19,7 +19,7 @@ export class Parser implements IParser<number> {
     };
 
     /**
-     * Parse a string into an integer number
+     * Parse a string into an float number
      * @param val String value to parse
      * @param options radix (the second parameter in parseInt method)
      */
@@ -29,7 +29,7 @@ export class Parser implements IParser<number> {
 
 
     /**
-     * Parse a string into an integer number
+     * Parse a string into an float number
      * @param val String value to parse
      * @param options No option is accepted
      */
@@ -38,7 +38,7 @@ export class Parser implements IParser<number> {
     }
 
     /**
-     * Parse a string into an integer number
+     * Parse a string into an float number
      * @param val String value to parse
      * @param options No option is accepted here
      */
