@@ -153,182 +153,196 @@ describe('[SpeedUP][string-to][parser][JSON]', () => {
         });
     });
 
-    // describe('validateAndParse', () => {
+    describe('validateAndParse', () => {
 
-    //     it('should return undefined if value is not parsable and no defaultValue is passed', async () => {
+        it('should return undefined if value is not parsable and no defaultValue is passed', async () => {
 
-    //         expect(parser.validateAndParseSync()).to.be.eq(undefined);
-    //         expect(await parser.validateAndParse()).to.be.eq(undefined);
-    //     });
+            const parser = new Parser<any>();
 
-    //     it('should return the value if value is parsable and no defaultValue is passed', testDone => {
+            expect(parser.validateAndParseSync()).to.be.eq(undefined);
+            expect(await parser.validateAndParse()).to.be.eq(undefined);
+        });
 
-    //         Async.parallel(
-    //             [
-    //                 taskDone => Async.forEach(
-    //                     NUMBERS,
-    //                     (n, cb) => {
+        it('should return the value if value is parsable and no defaultValue is passed', testDone => {
 
-    //                         try {
-    //                             expect(parser.validateAndParseSync(n)).to.be.eq(parseFloat(n));
-    //                             return cb();
-    //                         }
-    //                         catch (err) {
-    //                             return cb(err);
-    //                         }
-    //                     },
-    //                     taskDone,
-    //                 ),
-    //                 taskDone => Async.forEach(
-    //                     NUMBERS,
-    //                     (n, cb) => {
+            Async.parallel(
+                [
+                    taskDone => Async.forEach(
+                        VALID_JSON_STRINGS,
+                        (n, cb) => {
 
-    //                         parser.validateAndParse(n)
-    //                             .then(parsed => {
+                            try {
+                                const parser = new Parser<any>();
+                                expect(parser.validateAndParseSync(n)).to.be.deep.eq(JSON.parse(n));
+                                return cb();
+                            }
+                            catch (err) {
+                                return cb(err);
+                            }
+                        },
+                        taskDone,
+                    ),
+                    taskDone => Async.forEach(
+                        VALID_JSON_STRINGS,
+                        (n, cb) => {
 
-    //                                 try {
-    //                                     expect(parsed).to.be.eq(parseFloat(n));
-    //                                     return cb();
-    //                                 }
-    //                                 catch (err) {
-    //                                     return cb(err);
-    //                                 }
-    //                             })
-    //                             .catch(cb);
-    //                     },
-    //                     taskDone,
-    //                 ),
-    //             ],
-    //             testDone,
-    //         );
-    //     });
+                            const parser = new Parser<any>();
 
-    //     it('should return the value if value is parsable and defaultValue is passed', testDone => {
+                            parser.validateAndParse(n)
+                                .then(parsed => {
 
-    //         Async.parallel(
-    //             [
-    //                 taskDone => Async.forEach(
-    //                     NUMBERS,
-    //                     (n, cb) => {
+                                    try {
+                                        expect(parsed).to.be.deep.eq(JSON.parse(n));
+                                        return cb();
+                                    }
+                                    catch (err) {
+                                        return cb(err);
+                                    }
+                                })
+                                .catch(cb);
+                        },
+                        taskDone,
+                    ),
+                ],
+                testDone,
+            );
+        });
 
-    //                         try {
-    //                             expect(parser.validateAndParseSync(n, .123456)).to.be.eq(parseFloat(n));
-    //                             expect(parser.validateAndParseSync(n, .123456)).to.be.not.eq(.123456);
-    //                             return cb();
-    //                         }
-    //                         catch (err) {
-    //                             return cb(err);
-    //                         }
-    //                     },
-    //                     taskDone,
-    //                 ),
-    //                 taskDone => Async.forEach(
-    //                     NUMBERS,
-    //                     (n, cb) => {
+        it('should return the value if value is parsable and defaultValue is passed', testDone => {
 
-    //                         parser.validateAndParse(n, .123456)
-    //                             .then(parsed => {
+            Async.parallel(
+                [
+                    taskDone => Async.forEach(
+                        VALID_JSON_STRINGS,
+                        (n, cb) => {
 
-    //                                 try {
-    //                                     expect(parsed).to.be.eq(parseFloat(n));
-    //                                     expect(parsed).to.be.not.eq(.123456);
-    //                                     return cb();
-    //                                 }
-    //                                 catch (err) {
-    //                                     return cb(err);
-    //                                 }
-    //                             })
-    //                             .catch(cb);
-    //                     },
-    //                     taskDone,
-    //                 ),
-    //             ],
-    //             testDone,
-    //         );
-    //     });
+                            try {
+                                const parser = new Parser<any>();
+                                expect(parser.validateAndParseSync(n, 123456)).to.be.deep.eq(JSON.parse(n));
+                                expect(parser.validateAndParseSync(n, 123456)).to.be.not.eq(.123456);
+                                return cb();
+                            }
+                            catch (err) {
+                                return cb(err);
+                            }
+                        },
+                        taskDone,
+                    ),
+                    taskDone => Async.forEach(
+                        VALID_JSON_STRINGS,
+                        (n, cb) => {
 
-    //     it('should return the default value if value is not parsable and defaultValue is passed', testDone => {
+                            const parser = new Parser<any>();
 
-    //         Async.parallel(
-    //             [
-    //                 taskDone => Async.forEach(
-    //                     INVALID_NUMBERS,
-    //                     (n, cb) => {
+                            parser.validateAndParse(n, .123456)
+                                .then(parsed => {
 
-    //                         try {
-    //                             expect(parser.validateAndParseSync(n, .123456)).to.be.eq(.123456);
-    //                             return cb();
-    //                         }
-    //                         catch (err) {
-    //                             return cb(err);
-    //                         }
-    //                     },
-    //                     taskDone,
-    //                 ),
-    //                 taskDone => Async.forEach(
-    //                     INVALID_NUMBERS,
-    //                     (n, cb) => {
+                                    try {
+                                        expect(parsed).to.be.deep.eq(JSON.parse(n));
+                                        expect(parsed).to.be.not.eq(.123456);
+                                        return cb();
+                                    }
+                                    catch (err) {
+                                        return cb(err);
+                                    }
+                                })
+                                .catch(cb);
+                        },
+                        taskDone,
+                    ),
+                ],
+                testDone,
+            );
+        });
 
-    //                         parser.validateAndParse(n, .123456)
-    //                             .then(parsed => {
+        it('should return the default value if value is not parsable and defaultValue is passed', testDone => {
 
-    //                                 try {
-    //                                     expect(parsed).to.be.eq(.123456);
-    //                                     return cb();
-    //                                 }
-    //                                 catch (err) {
-    //                                     return cb(err);
-    //                                 }
-    //                             })
-    //                             .catch(cb);
-    //                     },
-    //                     taskDone,
-    //                 ),
-    //             ],
-    //             testDone,
-    //         );
-    //     });
+            Async.parallel(
+                [
+                    taskDone => Async.forEach(
+                        VALID_JSON_STRINGS,
+                        (n, cb) => {
 
-    //     it('should return the undefined if value is not parsable and no default value is passed', testDone => {
+                            try {
+                                const parser = new Parser<any>();
+                                expect(parser.validateAndParseSync(undefined, .123456)).to.be.deep.eq(.123456);
+                                return cb();
+                            }
+                            catch (err) {
+                                return cb(err);
+                            }
+                        },
+                        taskDone,
+                    ),
+                    taskDone => Async.forEach(
+                        VALID_JSON_STRINGS,
+                        (n, cb) => {
 
-    //         Async.parallel(
-    //             [
-    //                 taskDone => Async.forEach(
-    //                     INVALID_NUMBERS,
-    //                     (n, cb) => {
+                            const parser = new Parser<any>();
 
-    //                         try {
-    //                             expect(parser.validateAndParseSync(n)).to.be.undefined;
-    //                             return cb();
-    //                         }
-    //                         catch (err) {
-    //                             return cb(err);
-    //                         }
-    //                     },
-    //                     taskDone,
-    //                 ),
-    //                 taskDone => Async.forEach(
-    //                     INVALID_NUMBERS,
-    //                     (n, cb) => {
+                            parser.validateAndParse(undefined, .123456)
+                                .then(parsed => {
 
-    //                         parser.validateAndParse(n)
-    //                             .then(parsed => {
+                                    try {
+                                        expect(parsed).to.be.deep.eq(.123456);
+                                        return cb();
+                                    }
+                                    catch (err) {
+                                        return cb(err);
+                                    }
+                                })
+                                .catch(cb);
+                        },
+                        taskDone,
+                    ),
+                ],
+                testDone,
+            );
+        });
 
-    //                                 try {
-    //                                     expect(parsed).to.be.undefined;
-    //                                     return cb();
-    //                                 }
-    //                                 catch (err) {
-    //                                     return cb(err);
-    //                                 }
-    //                             })
-    //                             .catch(cb);
-    //                     },
-    //                     taskDone,
-    //                 ),
-    //             ],
-    //             testDone,
-    //         );
-    //     });
-    // });
+        it('should return the undefined if value is not parsable and no default value is passed', testDone => {
+
+            Async.parallel(
+                [
+                    taskDone => Async.forEach(
+                        VALID_JSON_STRINGS,
+                        (n, cb) => {
+
+                            try {
+                                const parser = new Parser<any>();
+                                expect(parser.validateAndParseSync()).to.be.undefined;
+                                return cb();
+                            }
+                            catch (err) {
+                                return cb(err);
+                            }
+                        },
+                        taskDone,
+                    ),
+                    taskDone => Async.forEach(
+                        VALID_JSON_STRINGS,
+                        (n, cb) => {
+
+                            const parser = new Parser<any>();
+
+                            parser.validateAndParse()
+                                .then(parsed => {
+
+                                    try {
+                                        expect(parsed).to.be.undefined;
+                                        return cb();
+                                    }
+                                    catch (err) {
+                                        return cb(err);
+                                    }
+                                })
+                                .catch(cb);
+                        },
+                        taskDone,
+                    ),
+                ],
+                testDone,
+            );
+        });
+    });
 });
