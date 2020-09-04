@@ -11,7 +11,7 @@ export class Parser implements IParser<number> {
     /**
      * Parse a string into an integer number
      * @param val String value to parse
-     * @param options radix (the second parameter in parseInt method)
+     * @param options validator.IsIntOptions
      */
     validateSync(val?: string, options?: validator.IsIntOptions): boolean {
         // safely convert to string (for null and undefined values)
@@ -21,7 +21,7 @@ export class Parser implements IParser<number> {
     /**
      * Parse a string into an integer number
      * @param val String value to parse
-     * @param options radix (the second parameter in parseInt method)
+     * @param options validator.IsIntOptions
      */
     async validate(val?: string, options?: validator.IsIntOptions): Promise<boolean> {
         return this.validateSync(val, options);
