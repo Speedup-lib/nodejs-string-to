@@ -104,7 +104,7 @@ export class Parser implements IParser<boolean> {
      * Validate and parse the value
      * @param val String value to parse
      * @param defaultValue Default value for the time that the value is neither in true nor in false values
-     * @param options Boolean parser options
+     * @param options Contains both validator and parser options
      */
     validateAndParseSync(val?: string, defaultValue?: boolean, options?: { validatorOptions?: BoolParserOptions, parserOptions?: BoolParserOptions }): boolean | undefined {
         return this.validateSync(val, options?.validatorOptions,) ? this.parseSync(val, options?.parserOptions,) : defaultValue;
