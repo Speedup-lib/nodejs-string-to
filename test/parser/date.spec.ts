@@ -162,48 +162,6 @@ describe('[SpeedUP][string-to][parser][date]', () => {
                         (n, cb) => {
 
                             try {
-                                expect(parser.validateAndParseSync(n)).to.be.a('date');
-                                return cb();
-                            }
-                            catch (err) {
-                                return cb(err);
-                            }
-                        },
-                        taskDone,
-                    ),
-                    taskDone => Async.forEach(
-                        VALID_DATE_STRINGS,
-                        (n, cb) => {
-
-                            parser.validateAndParse(n)
-                                .then(parsed => {
-
-                                    try {
-                                        expect(parsed).to.be.a('date');
-                                        return cb();
-                                    }
-                                    catch (err) {
-                                        return cb(err);
-                                    }
-                                })
-                                .catch(cb);
-                        },
-                        taskDone,
-                    ),
-                ],
-                testDone,
-            );
-        });
-
-        it('should return parsed value if value is parsable and no defaultValue is passed', testDone => {
-
-            Async.parallel(
-                [
-                    taskDone => Async.forEach(
-                        VALID_DATE_STRINGS,
-                        (n, cb) => {
-
-                            try {
                                 const parsed = parser.validateAndParseSync(n);
                                 expect(parsed).to.be.a('date');
                                 expect(parsed).to.be.greaterThan(DEFAULT_DATE);
