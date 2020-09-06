@@ -2,17 +2,15 @@
  * @speedup/string-to library
  */
 
-import { parser as boolParser, } from './parser/bool';
-import { parser as dateParser, } from './parser/date';
-import { parser as numberParser, } from './parser/number';
+import * as array from './parser/array';
+import * as bool from './parser/bool';
+import * as date from './parser/date';
+import * as float from './parser/float';
+import * as int from './parser/int';
+import * as json from './parser/json';
+import * as number from './parser/number';
 
-export * as arrayParser from './parser/array';
-export * as boolParser from './parser/bool';
-export * as dateParser from './parser/date';
-export * as floatParser from './parser/float';
-export * as intParser from './parser/int';
-export * as jsonParser from './parser/json';
-export * as numberParser from './parser/number';
+export { array, bool, date, float, int, json, number, };
 
 export type TryAllOptions = {
 
@@ -54,17 +52,17 @@ export const tryAnyToPrimitive = (val?: any, options?: TryAllOptions): number | 
 	if (val === undefined || val === null) { return val; }
 
 	if (mergedOptions.number === true) {
-		const numberValue = numberParser.validateAndParseSync(val);
+		const numberValue = number.parser.validateAndParseSync(val);
 		if (!!numberValue) { return numberValue; } // eslint-disable-line no-extra-boolean-cast
 	}
 
 	if (mergedOptions.date === true) {
-		const dateValue = dateParser.validateAndParseSync(val);
+		const dateValue = date.parser.validateAndParseSync(val);
 		if (!!dateValue) { return dateValue; } // eslint-disable-line no-extra-boolean-cast
 	}
 
 	if (mergedOptions.bool === true) {
-		const boolValue = boolParser.validateAndParseSync(val);
+		const boolValue = bool.parser.validateAndParseSync(val);
 		if (!!boolValue) { return boolValue; } // eslint-disable-line no-extra-boolean-cast
 	}
 
