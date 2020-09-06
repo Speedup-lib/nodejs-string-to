@@ -1,34 +1,125 @@
-# NodeJS module (TypeScript)
+# @SpeedUP/string-to
 
-Try to describe your module briefly here. This is the first part that takes the user's attention.
+Convert all the string values in an array, an object or a single property to the best primitive type.
 
 [![NPM version][npm-image]][npm-url]
 [![NPM downloads][downloads-image]][downloads-url]
-[![Coverage Status][coveralls-image]][coveralls-url]
 
 ## Installation
 
 ```sh
 
 # NPM
-npm i your-module-name --save
+npm i @speedup/string-to --save
 
 # Yarn
-yarn install your-module-name
+yarn install @speedup/string-to
 
 ```
 
 ## Usage
 
+### Javascript
+
 ```js
 
-const MyModule = require('your-module-name');
+const { tryAnyToPrimitive, parseArrayItemsSync, parseObjectKeysSync, } = require('@speedup/string-to');
 
-const instance = new MyModule({
-    /**
-     * Your configuration
-     */
-});
+// supports single-level array as well as N-level array
+// check test/index.spec.ts to see more examples
+const originalArrayD1 = [
+    '123456',
+    '0.123456',
+    'yes',
+    'November 2018',
+    null,
+    undefined,
+];
+
+const parsedArray = parseArrayItemsSync(originalArrayD1);
+
+/*
+    parsedArray = [
+        123456,
+        0.123456,
+        true,
+        new Date('November 2018'),
+        null,
+        undefined,
+    ]
+*/
+
+// supports single-level object as well as N-level object
+// check test/index.spec.ts to see more examples
+const originalObjectD1 = {
+    name: 'John Doe',
+    age: '35',
+    birthday: 'November 1985',
+    married: 'yes',
+};
+
+const parsedObject = parseObjectKeysSync(originalObjectD1);
+
+/*
+    parsedArray = {
+        name: 'John Doe',
+        age: 35,
+        birthday: new Date('November 1985'),
+        married: true,
+    }
+*/
+
+```
+
+### TypeScript
+
+```ts
+
+import { tryAnyToPrimitive, parseArrayItemsSync, parseObjectKeysSync, } from '@speedup/string-to';
+
+// supports single-level array as well as N-level array
+// check test/index.spec.ts to see more examples
+const originalArrayD1 = [
+    '123456',
+    '0.123456',
+    'yes',
+    'November 2018',
+    null,
+    undefined,
+];
+
+const parsedArray = parseArrayItemsSync(originalArrayD1);
+
+/*
+    parsedArray = [
+        123456,
+        0.123456,
+        true,
+        new Date('November 2018'),
+        null,
+        undefined,
+    ]
+*/
+
+// supports single-level object as well as N-level object
+// check test/index.spec.ts to see more examples
+const originalObjectD1 = {
+    name: 'John Doe',
+    age: '35',
+    birthday: 'November 1985',
+    married: 'yes',
+};
+
+const parsedObject = parseObjectKeysSync(originalObjectD1);
+
+/*
+    parsedArray = {
+        name: 'John Doe',
+        age: 35,
+        birthday: new Date('November 1985'),
+        married: true,
+    }
+*/
 
 ```
 
@@ -38,9 +129,7 @@ And you're good to go!
 
 MIT
 
-[npm-image]: https://img.shields.io/npm/v/@itemsjs/config.svg?color=orange
-[npm-url]: https://npmjs.org/package/@itemsjs/config
-[downloads-image]: https://img.shields.io/npm/dt/@itemsjs/config.svg
-[downloads-url]: https://npmjs.org/package/@itemsjs/config
-[coveralls-image]: http://coveralls.io
-[coveralls-url]: https://coveralls.io
+[npm-image]: https://img.shields.io/npm/v/@speedup/string-to.svg?color=orange
+[npm-url]: https://npmjs.org/package/@speedup/string-to
+[downloads-image]: https://img.shields.io/npm/dt/@speedup/string-to.svg
+[downloads-url]: https://npmjs.org/package/@speedup/string-to
