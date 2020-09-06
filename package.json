@@ -1,6 +1,6 @@
 {
   "name": "@speedup/string-to",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Convert all the string variables into their actual data type using different parsers",
   "main": "dist/index.js",
   "scripts": {
@@ -37,7 +37,7 @@
     "boolean",
     "date"
   ],
-  "types": "index.d.ts",
+  "types": "dist/index.d.ts",
   "author": "Open Project Templates",
   "license": "MIT",
   "bugs": {
