@@ -5,6 +5,7 @@ coverage/
 src/
 test/
 
+.eslintrc.json
 .gitignore
 .npmignore
 
