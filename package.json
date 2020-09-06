@@ -1,7 +1,6 @@
 {
   "name": "@speedup/string-to",
   "version": "1.0.0",
-  "private": true,
   "description": "Convert all the string variables into their actual data type using different parsers",
   "main": "dist/index.js",
   "scripts": {
