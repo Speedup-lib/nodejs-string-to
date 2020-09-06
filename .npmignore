@@ -3,7 +3,7 @@
 coverage/
 
 src/
-tests/
+test/
 
 .gitignore
 .npmignore
